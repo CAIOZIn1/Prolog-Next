@@ -10,10 +10,10 @@ server(Port) :-
 tecnologia(python, [iniciante, intermediario, avancado], [web, data_science, automacao], [funcional, oo], [windows, mac, linux]).
 tecnologia(java, [intermediario, avancado], [web, mobile], [oo], [windows, mac, linux]).
 tecnologia(javascript, [iniciante, intermediario, avancado], [web, mobile], [funcional, oo], [windows, mac, linux]).
-tecnologia(C, [iniciante, intermediario, avancado], [desktop], [oo], [windows, mac, linux]).
-tecnologia(C++, [iniciante, intermediario, avancado], [desktop], [oo], [windows, mac, linux]).
+tecnologia(c, [iniciante, intermediario, avancado], [desktop], [oo], [windows, mac, linux]).
+tecnologia(cpp, [iniciante, intermediario, avancado], [desktop], [oo], [windows, mac, linux]).
 tecnologia(prolog, [iniciante, intermediario, avancado], [desktop, web], [oo], [windows, mac, linux]).
-tecnologia(Go, [ intermediario, avancado], [desktop, web, mobile], [oo], [windows, mac, linux]).
+tecnologia(go, [ intermediario, avancado], [desktop, web, mobile], [oo], [windows, mac, linux]).
 tecnologia(swift, [iniciante, intermediario], [mobile], [oo], [mac]).
 
 recomendar(Experiencia, Projeto, Preferencia, Plataforma, Tecnologia) :-
