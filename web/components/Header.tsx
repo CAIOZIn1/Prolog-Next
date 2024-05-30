@@ -12,15 +12,20 @@ import { CgClose } from "react-icons/cg";
 import { BsInfoLg } from "react-icons/bs";
 import { useEffect, useState } from 'react';
 import { useTheme } from '@/context/theme-context';
+import Link from 'next/link';
+import { Locale } from '@/config/i18n.config';
+import { getDictonaryUseClient } from '@/dictionaries/default-dictionary-use-client';
 
 
-export default function Header() {
-  const { theme, toggleTheme} = useTheme();
+export default function Header({params}: {params: {lang: Locale}}) {
+  const { toggleDarkTheme, toggleLightTheme} = useTheme();
+
+  const dict = getDictonaryUseClient(params.lang)
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [notIsMobile, setIsNotMobile] = useState(false);
 
-  const isDarkMode = theme === 'dark';
+  const langIsPtBR = params.lang === 'pt-BR';
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,43 +50,39 @@ export default function Header() {
 
           <div className='ml-4'>
             <ul className='flex justify-center items-center font-extrabold uppercase gap-7'>
-              <li className='cursor-pointer'>Sobre</li>
-              <li className='cursor-pointer'>Pesquisar</li>
-              <li className='cursor-pointer'>Documentação</li>
+              <li className='cursor-pointer'>{dict.header.about}</li>
+              <li className='cursor-pointer'>{dict.header.search}</li>
+              <li className='cursor-pointer'>{dict.header.documentation}</li>
             </ul>
           </div>
         </>
         )}
       </div>
 
-      <div className="flex items-center gap-4">
-        <a className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black w-auto' href='https://github.com/CAIOZIn1/Prolog-Next' target='_blank'>
+      <div className="flex items-center gap-4 mr-6">
+        <a className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black hover:bg-zinc-500 dark:border-2 dark:border-white' href='https://github.com/CAIOZIn1/Prolog-Next' target='_blank'>
           <FiGithub />
         </a>
-        <div className='flex items-center justify-between w-[125px] rounded-full border-2 border-black'>
-          <button className={`group ${!isDarkMode ? 'text-white' : 'text-black'} p-4 flex items-center gap-2 text-[1.50rem] cursor-pointer rounded-full transition-all ease-in-out ${!isDarkMode ? 'bg-black' : ''}`} >
+
+        <div className='flex items-center justify-between w-[125px] rounded-full border-2 border-black dark:border-white'>
+          <button className='group text-zinc-50 p-4 flex items-center gap-2 text-[1.50rem] cursor-pointer rounded-full transition-all ease-in-out bg-black' onClick={toggleLightTheme}>
             <PiSunBold className='text-2xl'/>
           </button>
-          <button className={`group ${isDarkMode ? 'text-white' : 'text-black'} p-4 flex items-center gap-2 cursor-pointer rounded-full transition-all ease-in-out ${isDarkMode ? 'bg-black' : ''}`}>
+
+          <button className='group dark:text-zinc-50 text-black p-4 flex items-center gap-2 cursor-pointer rounded-full transition-all ease-in-out dark:bg-zinc-700' onClick={toggleDarkTheme}>
             <MdNightlight className='text-2xl'/>
           </button>
         </div>
-        <button className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black'>
+
+        <Link className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black hover:bg-zinc-500 dark:border-2 dark:border-white' href={langIsPtBR ? '/en-US' : '/pt-BR'}>
           <IoLanguage className='text-2xl' />
-        </button>
-        {notIsMobile && (
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='text-white p-4'>
-            <svg className='w-6 h-6' fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-        )}
+        </Link>
       </div>
 
       { !notIsMobile && (
         <>
           {isMenuOpen && (
-            <div className='group text-white p-4 flex items-center flex-col gap-11 text-[1.35rem] cursor-pointer rounded-full bg-black absolute right-[42px] bottom-[29px] h-[250px] min-w-[54px] transition-all ease-in-out delay-700' >
+            <div className='group text-white p-4 flex flex-col items-center gap-11 mt-2 text-[1.35rem] cursor-pointer rounded-full bg-black dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black hover:bg-zinc-500 dark:border-2 dark:border-white absolute right-[42px] bottom-[29px] h-[250px] min-w-[54px] transition-all ease-in-out delay-700' >
               <button className='mt-1'>
                 <BsInfoLg />
               </button>
@@ -96,7 +97,7 @@ export default function Header() {
             </div>
           )}
 
-          <button className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black absolute right-10 bottom-7 border-2 border-zinc-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black hover:bg-zinc-500 dark:border-2 dark:border-white absolute right-10 bottom-7 border-2 ' onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <CgClose className='font-bold'/> : <GiHamburgerMenu />}
           </button>
         </>
