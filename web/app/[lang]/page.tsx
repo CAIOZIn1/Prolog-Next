@@ -1,7 +1,8 @@
-import Image from "next/image";
+import Intro from "@/components/Intro";
+import { Locale } from "@/config/i18n.config";
 
-export default function Home() {
+export default function Home({params}: {params: {lang: Locale}}) {
   return (
-    <main />
+    <Intro params={params}/>
   );
 }
