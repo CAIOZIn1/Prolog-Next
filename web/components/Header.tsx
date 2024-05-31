@@ -15,6 +15,7 @@ import { useTheme } from '@/context/theme-context';
 import Link from 'next/link';
 import { Locale } from '@/config/i18n.config';
 import { getDictonaryUseClient } from '@/dictionaries/default-dictionary-use-client';
+import {motion} from 'framer-motion';
 
 
 export default function Header({params}: {params: {lang: Locale}}) {
@@ -42,29 +43,39 @@ export default function Header({params}: {params: {lang: Locale}}) {
       <div className="flex items-center ml-6">
       {notIsMobile && (
         <>
-          <Image
-            src={logo}
-            alt='Logotipo'
-            className='h-14 w-14'
-          />
+          <motion.div
+            whileHover={{scale: 1.2, rotate: 90}}
+            whileTap={{ scale: 0.8, rotate: -90, borderRadius: "100%"}}
+          >
+            <Image
+              src={logo}
+              alt='Logotipo'
+              className='h-14 w-14'
+            />
+          </motion.div>
 
-          <div className='ml-4'>
+          <motion.div
+            className='ml-4'
+            initial={{y: -100, x:'-50%', opacity: 0 }}
+            animate={{y: 0, x: '0%', opacity: 1}}
+          >
             <ul className='flex justify-center items-center font-extrabold uppercase gap-7'>
-              <li className='cursor-pointer'>{dict.header.about}</li>
-              <li className='cursor-pointer'>{dict.header.search}</li>
-              <li className='cursor-pointer'>{dict.header.documentation}</li>
+              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 rounded-full'>{dict.header.about}</li>
+              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 rounded-full'>{dict.header.search}</li>
+              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 rounded-full'>{dict.header.documentation}</li>
             </ul>
-          </div>
+          </motion.div>
         </>
         )}
       </div>
 
       <div className="flex items-center gap-4 mr-6">
-        <a className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black hover:bg-zinc-500 dark:border-2 dark:border-white' href='https://github.com/CAIOZIn1/Prolog-Next' target='_blank'>
+        <Link className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black hover:bg-gray-500 dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black dark:hover:bg-zinc-500 dark:border-2 dark:border-white' href='https://github.com/CAIOZIn1/Prolog-Next' target='_blank'>
           <FiGithub />
-        </a>
+        </Link>
 
-        <div className='flex items-center justify-between w-[125px] rounded-full border-2 border-black dark:border-white'>
+        <div
+          className='flex items-center justify-between w-[125px] rounded-full border-2 border-black dark:border-white'>
           <button className='group text-zinc-50 p-4 flex items-center gap-2 text-[1.50rem] cursor-pointer rounded-full transition-all ease-in-out bg-black' onClick={toggleLightTheme}>
             <PiSunBold className='text-2xl'/>
           </button>
@@ -74,7 +85,7 @@ export default function Header({params}: {params: {lang: Locale}}) {
           </button>
         </div>
 
-        <Link className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black hover:bg-zinc-500 dark:border-2 dark:border-white' href={langIsPtBR ? '/en-US' : '/pt-BR'}>
+        <Link className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black hover:bg-gray-500 dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black dark:hover:bg-zinc-500 dark:border-2 dark:border-white' href={langIsPtBR ? '/en-US' : '/pt-BR'}>
           <IoLanguage className='text-2xl' />
         </Link>
       </div>
@@ -97,7 +108,7 @@ export default function Header({params}: {params: {lang: Locale}}) {
             </div>
           )}
 
-          <button className='group text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black hover:bg-zinc-500 dark:border-2 dark:border-white absolute right-10 bottom-7 border-2 ' onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className='group fixed text-white p-4 flex items-center gap-2 text-[1.35rem] cursor-pointer rounded-full transition-all ease-in-out bg-black dark:text-zinc-50 w-auto dark:bg-zinc-700 hover:scale-110 hover:text-black hover:bg-zinc-500 dark:border-2 dark:border-white right-10 bottom-7 border-2 ' onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <CgClose className='font-bold'/> : <GiHamburgerMenu />}
           </button>
         </>
