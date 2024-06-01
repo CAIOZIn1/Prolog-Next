@@ -25,5 +25,6 @@ export const enUS = {
     'Movie suggestions you will love.', 1000,
     'Welcome to the movie paradise.', 1000,
     'Your guide to the best movie marathon.', 1000
-  ]
+  ],
+  examples: 'Examples'
 }

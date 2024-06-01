@@ -5,6 +5,7 @@ import { getDictonaryUseClient } from '@/dictionaries/default-dictionary-use-cli
 import Img from '@/public/mainImage.png'
 import Image from 'next/image';
 import { TypeAnimation } from "react-type-animation";
+import {motion} from 'framer-motion';
 
 export default function Intro({params}: {params: {lang: Locale}}) {
   const dict = getDictonaryUseClient(params.lang)
@@ -21,9 +22,19 @@ export default function Intro({params}: {params: {lang: Locale}}) {
         />
       </h1>
 
-      <div className='w-[365px] h-[365px] md:w-[700px] md:h-[700px]'>
+      <motion.div
+        className='w-[365px] h-[365px] md:w-[700px] md:h-[700px] animate-[wiggle_1s_ease-in-out_infinite]'
+        initial={{opacity: 0, scale: 0, rotate: 0}}
+        animate={{opacity: 1, scale: 1, rotate: 360}}
+        transition={{
+          type: 'spring',
+          stiffness: 125,
+          delay: 0.2,
+          duration: 0.7
+        }}
+      >
         <Image src={Img} alt='Imagem Intro' />
-      </div>
+      </motion.div>
     </div>
   )
 }
