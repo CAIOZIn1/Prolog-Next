@@ -25,5 +25,6 @@ export const ptBR = {
     'Sugestões de filmes que você vai adorar.', 1000,
     'Seja bem-vindo ao paraíso dos filmes.', 1000,
     'Seu guia para a melhor maratona de filmes.', 1000
-  ]
+  ],
+  examples: 'Exemplos'
 }

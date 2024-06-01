@@ -60,9 +60,9 @@ export default function Header({params}: {params: {lang: Locale}}) {
             animate={{y: 0, x: '0%', opacity: 1}}
           >
             <ul className='flex justify-center items-center font-extrabold uppercase gap-7'>
-              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 rounded-full'>{dict.header.about}</li>
-              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 rounded-full'>{dict.header.search}</li>
-              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 rounded-full'>{dict.header.documentation}</li>
+              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 dark:hover:bg-zinc-500 hover:p-3 rounded-full'>{dict.header.about}</li>
+              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 dark:hover:bg-zinc-500 rounded-full'>{dict.header.search}</li>
+              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 dark:hover:bg-zinc-500 rounded-full'>{dict.header.documentation}</li>
             </ul>
           </motion.div>
         </>
@@ -76,7 +76,7 @@ export default function Header({params}: {params: {lang: Locale}}) {
 
         <div
           className='flex items-center justify-between w-[125px] rounded-full border-2 border-black dark:border-white'>
-          <button className='group text-zinc-50 p-4 flex items-center gap-2 text-[1.50rem] cursor-pointer rounded-full transition-all ease-in-out bg-black' onClick={toggleLightTheme}>
+          <button className='group text-zinc-50 p-4 flex items-center gap-2 text-[1.50rem] cursor-pointer rounded-full transition-all ease-in-out bg-black dark:bg-transparent' onClick={toggleLightTheme}>
             <PiSunBold className='text-2xl'/>
           </button>
 

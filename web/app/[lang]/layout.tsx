@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/Header";
 import ThemeContextProvider from '@/context/theme-context';
 import { i18n } from "@/config/i18n.config";
+import { ArrowDown } from "@/components/ArrowDown";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         <ThemeContextProvider>
           <Header params={params}/>
           {children}
+          <ArrowDown />
         </ThemeContextProvider>
       </body>
     </html>
