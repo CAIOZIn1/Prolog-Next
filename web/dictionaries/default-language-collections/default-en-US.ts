@@ -1,9 +1,5 @@
 export const enUS = {
-  header: {
-    about: 'About',
-    search: 'Search',
-    documentation: 'Documentation'
-  },
+  header: [{phrase: 'About', id: 1 }, {phrase: 'Search', id: 2}, {phrase: 'Documentation', id: 2}],
   sequence: [
     'Discover the best movies to watch today.', 1000,
     'Find your movies.', 1000,
@@ -26,5 +22,14 @@ export const enUS = {
     'Welcome to the movie paradise.', 1000,
     'Your guide to the best movie marathon.', 1000
   ],
-  examples: 'Examples'
+  examples: 'Examples',
+  about: {
+    title: 'About',
+    subtitle: 'Description',
+    describe: 'Welcome to the Movie Recommender – your new best friend when it comes to picking what to watch! Tired of spending more time searching for a movie than actually watching one? Our project is here to solve that problem in a simple, quick, and even a bit funny way.',
+    subtitleWhatMake: 'What we do?',
+    whatMake: 'We take your preferences and movie tastes and, with a touch of magic (also known as smart algorithms), find films that will make you laugh, cry, get thrilled, and of course, avoid those flops that make you lose two hours of your life.',
+    subtitleHowItWorks: 'How it works?',
+    faq: [`Answer a few questions: We want to get to know you better! And no, we won't ask for your zodiac sign.`, `Get recommendations: Based on your choices, we suggest movies that match your style. It's almost like we're your cinematic cupid.`, `Watch and enjoy: Grab some popcorn, relax, and let our recommender show you that choosing a movie doesn't have to be an epic saga.`]
+  },
 }

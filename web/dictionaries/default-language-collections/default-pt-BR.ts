@@ -1,9 +1,5 @@
 export const ptBR = {
-  header: {
-    about: 'Sobre',
-    search: 'Pesquisar',
-    documentation: 'Documentação'
-  },
+  header: [ {phrase:'Sobre', id: 1}, {phrase: 'Pesquisar', id: 2}, {phrase: 'Documentação', id: 3}],
   sequence: [
     'Descubra os melhores filmes para assistir hoje.', 1000,
     'Encontre seus filmes.', 1000,
@@ -26,5 +22,15 @@ export const ptBR = {
     'Seja bem-vindo ao paraíso dos filmes.', 1000,
     'Seu guia para a melhor maratona de filmes.', 1000
   ],
-  examples: 'Exemplos'
+  examples: 'Exemplos',
+  about: {
+    title: 'Sobre',
+    subtitle: 'Descriação',
+    describe: 'Bem-vindo ao Recomendador de Filmes – seu novo melhor amigo quando o assunto é escolher o que assistir! Já cansou de passar mais tempo procurando um filme do que realmente assistindo? Nosso projeto chegou para resolver esse problema de forma simples, rápida e até um pouco engraçada.',
+    subtitleWhatMake: 'O que fazemos?',
+    whatMake: 'Nós pegamos suas preferências e gostos cinematográficos e, com um toque de mágica (também conhecido como algoritmos inteligentes), encontramos filmes que vão fazer você rir, chorar, se arrepiar e, claro, evitar aquelas bombas que fazem a gente perder duas horas da vida.',
+    subtitleHowItWorks: 'Como trabalhamos?',
+    faq: ['Responda algumas perguntas: Nós queremos conhecer você melhor! E não, não vamos perguntar seu signo.', 'Receba recomendações: Baseado nas suas escolhas, sugerimos filmes que combinam com o seu estilo. É quase como se fôssemos o seu cupido cinematográfico.', 'Assista e aproveite: Pegue a pipoca, relaxe e deixe nosso recomendador mostrar que escolher um filme não precisa ser uma saga épica.']
+  },
+
 }
