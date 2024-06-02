@@ -15,7 +15,7 @@ import { useTheme } from '@/context/theme-context';
 import Link from 'next/link';
 import { Locale } from '@/config/i18n.config';
 import { getDictonaryUseClient } from '@/dictionaries/default-dictionary-use-client';
-import {motion} from 'framer-motion';
+import { motion} from 'framer-motion';
 
 
 export default function Header({params}: {params: {lang: Locale}}) {
@@ -25,6 +25,7 @@ export default function Header({params}: {params: {lang: Locale}}) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [notIsMobile, setIsNotMobile] = useState(false);
+
 
   const langIsPtBR = params.lang === 'pt-BR';
 
@@ -47,11 +48,13 @@ export default function Header({params}: {params: {lang: Locale}}) {
             whileHover={{scale: 1.2, rotate: 90}}
             whileTap={{ scale: 0.8, rotate: -90, borderRadius: "100%"}}
           >
-            <Image
-              src={logo}
-              alt='Logotipo'
-              className='h-14 w-14'
-            />
+            <Link href={`/${params.lang}`}>
+              <Image
+                src={logo}
+                alt='Logotipo'
+                className='h-14 w-14'
+              />
+            </Link>
           </motion.div>
 
           <motion.div
@@ -60,9 +63,29 @@ export default function Header({params}: {params: {lang: Locale}}) {
             animate={{y: 0, x: '0%', opacity: 1}}
           >
             <ul className='flex justify-center items-center font-extrabold uppercase gap-7'>
-              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 dark:hover:bg-zinc-500 hover:p-3 rounded-full'>{dict.header.about}</li>
-              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 dark:hover:bg-zinc-500 rounded-full'>{dict.header.search}</li>
-              <li className='cursor-pointer transition-all ease-in-out hover:bg-pink-100 hover:p-3 dark:hover:bg-zinc-500 rounded-full'>{dict.header.documentation}</li>
+              {dict.header.map((item) => {
+                let link;
+
+                if(langIsPtBR){
+
+                  if(item.phrase === 'Sobre') {
+                    link = 'About'
+                  } else if(item.phrase === 'Pesquisar') {
+                    link = 'Search'
+                  } else {
+                    link = 'Documentation'
+                  }
+                }
+
+                return (
+                <Link
+                  className='cursor-pointer transition-all ease-in-out  hover:bg-gray-950 flex dark:hover:bg-zinc-500 hover:text-white hover:p-3 rounded-full'
+                  key={item.id} href={`/${params.lang}/${link || item.phrase}`}
+                >
+                  {item.phrase}
+                </Link>
+                )
+              })}
             </ul>
           </motion.div>
         </>
