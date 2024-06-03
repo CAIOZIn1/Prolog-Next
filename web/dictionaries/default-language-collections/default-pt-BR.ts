@@ -32,5 +32,19 @@ export const ptBR = {
     subtitleHowItWorks: 'Como trabalhamos?',
     faq: ['Responda algumas perguntas: Nós queremos conhecer você melhor! E não, não vamos perguntar seu signo.', 'Receba recomendações: Baseado nas suas escolhas, sugerimos filmes que combinam com o seu estilo. É quase como se fôssemos o seu cupido cinematográfico.', 'Assista e aproveite: Pegue a pipoca, relaxe e deixe nosso recomendador mostrar que escolher um filme não precisa ser uma saga épica.']
   },
-
+  select: {
+    recomender: 'Recomendador de Filme',
+    gener: 'Gênero: ',
+    style: 'Estilo: ',
+    search: 'Buscar',
+    results: 'Resultados',
+    about: 'Sobre: ',
+    director: 'Diretor: ',
+    actors: 'Atores: ',
+    awards: 'Premiações: ',
+    year: 'Ano: ',
+    name: 'Nome: ',
+    moreResults: 'Outros resultados: ',
+    noSearch: 'Não há filmes com essas classificações.'
+  }
 }
