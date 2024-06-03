@@ -32,4 +32,19 @@ export const enUS = {
     subtitleHowItWorks: 'How it works?',
     faq: [`Answer a few questions: We want to get to know you better! And no, we won't ask for your zodiac sign.`, `Get recommendations: Based on your choices, we suggest movies that match your style. It's almost like we're your cinematic cupid.`, `Watch and enjoy: Grab some popcorn, relax, and let our recommender show you that choosing a movie doesn't have to be an epic saga.`]
   },
+  select: {
+    recomender: 'Movie recommender',
+    gener: 'Gender: ',
+    style: 'Style: ',
+    search: 'Search',
+    results: 'Results',
+    about: 'Sobre: ',
+    director: 'Director: ',
+    actors: 'Actors: ',
+    awards: 'Awards: ',
+    year: 'Year: ',
+    name: 'Name',
+    moreResults: 'More results: ',
+    noSearch: 'No results with this classification'
+  }
 }

@@ -2,40 +2,59 @@
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_json)).
 
-:- http_handler(root(recomendacao), handle_recomendacao, []).
+:- http_handler(root(recomendacao), handle_recomendacao(Method), [method(Method), methods([options, post])]).
 
 server(Port) :-
     http_server(http_dispatch, [port(Port)]).
 
 % Definição de filmes com base em atributos
-filme('Um Sonho de Liberdade', [drama], 1994, '18', [ingles]).
-filme('O Poderoso Chefão', [crime, drama], 1972, '18', [ingles, italiano]).
-filme('Batman: O Cavaleiro das Trevas', [acao, crime, drama], 2008, '12', [ingles]).
-filme('Pulp Fiction: Tempo de Violência', [crime, drama], 1994, '18', [ingles, frances]).
-filme('O Senhor dos Anéis: O Retorno do Rei', [acao, aventura, drama], 2003, '12', [ingles, sindarin]).
-filme('Forrest Gump: O Contador de Histórias', [drama, romance], 1994, '12', [ingles]).
-filme('A Origem', [acao, aventura, ficcao], 2010, '12', [ingles, japones, frances]).
-filme('Clube da Luta', [drama], 1999, '18', [ingles]).
-filme('Interstellar', [aventura, drama, ficcao], 2014, '12', [ingles]).
-filme('Parasita', [comedia, drama, suspense], 2019, '16', [coreano]).
-filme('Matrix', [acao, ficcao], 1999, '16', [ingles]).
-filme('Cidade de Deus', [crime, drama], 2002, '18', [portugues]).
-filme('A Vida é Bela', [comedia, drama, guerra], 1997, '10', [italiano]).
-filme('Os Incríveis', [animacao, acao, aventura], 2004, 'Livre', [ingles]).
-filme('Gladiador', [acao, aventura, drama], 2000, '16', [ingles]).
+filme('The Shawshank Redemption', [drama, crime], [classico]).
+filme('The Godfather', [drama, crime], [classico]).
+filme('The Dark Knight', [acao, crime], [superheroi]).
+filme('Pulp Fiction', [drama, crime], [cult]).
+filme('The Lord of the Rings: The Return of the King', [aventura, fantasia], [epico]).
+filme('Forrest Gump', [drama, romance], [classico]).
+filme('Inception', [acao, sci-fi], [thriller]).
+filme('Fight Club', [drama, thriller], [cult]).
+filme('The Matrix', [acao, sci-fi], [cult]).
+filme('Goodfellas', [drama, crime], [classico]).
+filme('The Silence of the Lambs', [drama, thriller], [suspense]).
+filme('Se7en', [drama, thriller], [suspense]).
+filme('Interstellar', [aventura, drama, sci-fi], [epico]).
+filme('Parasite', [drama, thriller], [moderno]).
+filme('Gladiator', [acao, aventura, drama], [epico]).
 
 % Regras para recomendar filmes com base nas preferências
-recomendar(Genero, Ano, Classificacao, Linguagem, Filme) :-
-    filme(Filme, Generos, AnoLancamento, Class, Linguagens),
+recomendar(Genero, Estilo, Filme) :-
+    filme(Filme, Generos, Estilos),
     member(Genero, Generos),
-    AnoLancamento >= Ano,
-    Class = Classificacao,
-    member(Linguagem, Linguagens).
+    member(Estilo, Estilos).
 
-handle_recomendacao(Request) :-
-    http_read_json(Request, JSONIn),
-    _{genero:Genero, ano:Ano, classificacao:Classificacao, linguagem:Linguagem} :< JSONIn,
-    findall(Filme, recomendar(Genero, Ano, Classificacao, Linguagem, Filme), Filmes),
-    reply_json(_{recomendacoes:Filmes}).
+% Adicionar cabeçalhos CORS manualmente
+add_cors_headers(_Request) :-
+    format('Access-Control-Allow-Origin: *~n'),
+    format('Access-Control-Allow-Methods: POST, GET, OPTIONS~n'),
+    format('Access-Control-Allow-Headers: Content-Type~n').
+
+handle_recomendacao(options, Request) :-
+    add_cors_headers(Request),
+    format('Content-type: text/plain~n~n'),
+    format('Preflight response').
+
+handle_recomendacao(post, Request) :-
+    add_cors_headers(Request),
+    catch(
+        (
+            http_read_json_dict(Request, JSONIn),
+            _{genero:Genero, estilo:Estilo} :< JSONIn,
+            findall(Filme, recomendar(Genero, Estilo, Filme), Filmes),
+            reply_json_dict(_{recomendacoes:Filmes})
+        ),
+        Error,
+        (
+            format(user_error, 'Error: ~w~n', [Error]),
+            reply_json_dict(_{error: 'Internal Server Error'}, [status(500)])
+        )
+    ).
 
 :- initialization(server(8000)).

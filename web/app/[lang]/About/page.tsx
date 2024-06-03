@@ -4,7 +4,7 @@ import { Locale } from "@/config/i18n.config";
 import { getDictonaryServerOnly } from "@/dictionaries/default-dictionary-server-only";
 
 export default function Home({params}: {params: {lang: Locale}}) {
-  const dict = getDictonaryServerOnly(params.lang)
+  const dict = getDictonaryServerOnly(params.lang);
 
   return(
     <div className="flex w-full h-full flex-col gap-16 items-center justify-center">
