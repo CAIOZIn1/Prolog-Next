@@ -24,13 +24,11 @@ filme('Interstellar', [aventura, drama, sci-fi], [epico]).
 filme('Parasite', [drama, thriller], [moderno]).
 filme('Gladiator', [acao, aventura, drama], [epico]).
 
-% Regras para recomendar filmes com base nas preferências
 recomendar(Genero, Estilo, Filme) :-
     filme(Filme, Generos, Estilos),
     member(Genero, Generos),
     member(Estilo, Estilos).
 
-% Adicionar cabeçalhos CORS manualmente
 add_cors_headers(_Request) :-
     format('Access-Control-Allow-Origin: *~n'),
     format('Access-Control-Allow-Methods: POST, GET, OPTIONS~n'),
